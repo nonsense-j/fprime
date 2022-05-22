@@ -165,12 +165,7 @@ module Ref {
     stack size Default.stackSize \
     priority 98
 
-  instance chanTlm: Svc.TlmChan base id 0x0C00 \
-    queue size Default.queueSize \
-    stack size Default.stackSize \
-    priority 97
-
-  instance prmDb: Svc.PrmDb base id 0x0D00 \
+  instance prmDb: Svc.PrmDb base id 0x0C00 \
     queue size Default.queueSize \
     stack size Default.stackSize \
     priority 96 \
@@ -186,10 +181,21 @@ module Ref {
 
   }
 
-  instance mathSender: Ref.MathSender base id 0xE00 \
+  instance chanTlm: Svc.TlmChan base id 0x0D00 \
+    queue size Default.queueSize \
+    stack size Default.stackSize \
+    priority 97
+
+  instance resCapController: Ref.ResCapController base id 0x0E00 \
     queue size Default.queueSize \
     stack size Default.stackSize \
     priority 100
+
+  instance resCapExecutor: Ref.ResCapExecutor base id 0x0F00 \
+    queue size Default.queueSize \
+    stack size Default.stackSize \
+    priority 100
+  # add more active instances here
 
   # ----------------------------------------------------------------------
   # Queued component instances
@@ -231,9 +237,6 @@ module Ref {
     queue size Default.queueSize
 
   instance sendBuffComp: Ref.SendBuff base id 0x2600 \
-    queue size Default.queueSize
-
-  instance mathReceiver: Ref.MathReceiver base id 0x2700 \
     queue size Default.queueSize
 
   # ----------------------------------------------------------------------
@@ -372,5 +375,20 @@ module Ref {
   }
 
   instance systemResources: Svc.SystemResources base id 0x4B00
+
+  instance envManager: Ref.EnvManager base id 0x4C00
+
+  instance simManager: Ref.SimManager base id 0x4D00
+
+  instance resCapStart: Ref.ResCapStart base id 0x4E00
+
+  instance resCapMove: Ref.ResCapMove base id 0x4F00
+
+  instance resCap_attack: Ref.ResCap_attack base id 0x5000
+
+  instance resCap_attack_over: Ref.ResCap_attack_over base id 0x5100
+
+  instance resCap_take_photo: Ref.ResCap_take_photo base id 0x5200
+  # add more passive instances here
 
 }

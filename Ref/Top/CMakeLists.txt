@@ -10,6 +10,7 @@ set(SOURCE_FILES
   "${CMAKE_CURRENT_LIST_DIR}/topology.fpp"
   "${CMAKE_CURRENT_LIST_DIR}/RefTopologyDefs.cpp"
 )
+
 set(MOD_DEPS
   Fw/Logger
   Svc/LinuxTime

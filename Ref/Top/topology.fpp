@@ -41,8 +41,16 @@ module Ref {
     instance fileUplink
     instance fileUplinkBufferManager
     instance linuxTime
-    instance mathSender
-    instance mathReceiver
+    instance envManager
+    instance simManager
+    instance resCapController
+    instance resCapExecutor
+    instance resCapStart
+    instance resCapMove
+    instance resCap_attack
+    instance resCap_attack_over
+    instance resCap_take_photo
+    # add more instances here
     instance pingRcvr
     instance prmDb
     instance rateGroup1Comp
@@ -108,7 +116,6 @@ module Ref {
       rateGroup1Comp.RateGroupMemberOut[2] -> chanTlm.Run
       rateGroup1Comp.RateGroupMemberOut[3] -> fileDownlink.Run
       rateGroup1Comp.RateGroupMemberOut[4] -> systemResources.run
-      rateGroup1Comp.RateGroupMemberOut[5] -> mathReceiver.schedIn
 
       # Rate group 2
       rateGroupDriverComp.CycleOut[Ports_RateGroups.rateGroup2] -> rateGroup2Comp.CycleIn
@@ -152,10 +159,24 @@ module Ref {
 
     }
 
-    connections Math {
-      mathSender.mathOpOut -> mathReceiver.mathOpIn
-      mathReceiver.mathResultOut -> mathSender.mathResultIn
+    connections ResCap {
+
+      envManager.envSetout -> resCapExecutor.envSetin
+      simManager.simControlout -> resCapController.simControlin
+
+      resCapController.resCapWakeout -> resCapExecutor.resCapWakein
+      resCapController.resCapExeCtrlout -> resCapExecutor.resCapExeCtrlin
+      resCapExecutor.resCapCallbackout -> resCapController.resCapCallbackin
+
+      resCapExecutor.resCapStartout  -> resCapStart.resCapStartin
+      resCapExecutor.resCapMoveout  -> resCapMove.resCapMovein
+      resCapExecutor.resCap_attack_out  -> resCap_attack.resCap_attack_in
+      resCapExecutor.resCap_attack_over_out  -> resCap_attack_over.resCap_attack_over_in
+      resCapExecutor.resCap_take_photo_out  -> resCap_take_photo.resCap_take_photo_in
+
     }
+
+    # add more connections here
 
   }
 
